@@ -1,0 +1,20 @@
+# Optional: this file does not install CodeRabbit or purchase a plan.
+# Activate the GitHub App only after reviewing access and pricing.
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: ko-KR
+reviews:
+  profile: chill
+  request_changes_workflow: false
+  auto_review:
+    enabled: false
+    drafts: false
+  path_filters:
+    - "!data/**"
+    - "!**/*.wav"
+    - "!**/*.mp3"
+    - "!**/*.m4a"
+    - "!**/*.flac"
+    - "!**/*.pt"
+    - "!**/*.pth"
+chat:
+  auto_reply: false

@@ -1,0 +1,51 @@
+# Secrets
+.env
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.key
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+*.egg-info/
+.ipynb_checkpoints/
+# Frontend / backend build output
+node_modules/
+dist/
+build/
+.next/
+coverage/
+target/
+.gradle/
+# Local data: do not upload recordings or training data
+/data/*
+!/data/README.md
+*.wav
+*.mp3
+*.m4a
+*.flac
+*.ogg
+*.aac
+*.webm
+*.mp4
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.zip
+# Local output and OS files
+.local/
+logs/
+*.log
+.DS_Store
+Thumbs.db
+.idea/

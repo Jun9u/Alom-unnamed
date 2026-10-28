@@ -1,0 +1,4 @@
+# Development tools only. No speech model or framework is selected.
+ruff==0.14.14
+pytest==9.0.2
+pre-commit==4.5.1

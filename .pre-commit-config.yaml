@@ -1,0 +1,24 @@
+minimum_pre_commit_version: "4.0.0"
+default_language_version:
+  python: python3.11
+repos:
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: Python lint (Ruff)
+        entry: ruff check --fix
+        language: python
+        additional_dependencies: [ruff==0.14.14]
+        types_or: [python, pyi]
+      - id: ruff-format
+        name: Python format (Ruff)
+        entry: ruff format
+        language: python
+        additional_dependencies: [ruff==0.14.14]
+        types_or: [python, pyi]
+      - id: repo-hygiene
+        name: Reject recordings, large files and common secrets
+        entry: python scripts/check_repo_hygiene.py
+        language: python
+        pass_filenames: false
+        always_run: true

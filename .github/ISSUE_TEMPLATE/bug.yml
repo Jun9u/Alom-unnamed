@@ -1,0 +1,23 @@
+name: 오류 신고
+description: 실제로 발생한 문제와 재현 방법을 기록합니다.
+title: "[오류] "
+body:
+  - type: textarea
+    id: steps
+    attributes:
+      label: 재현 방법
+      description: 기기·환경과 수행한 순서를 적어주세요. 개인정보와 비밀키는 지우세요.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 실제 결과
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 기대한 결과
+    validations:
+      required: true

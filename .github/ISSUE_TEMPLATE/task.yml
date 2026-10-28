@@ -1,0 +1,30 @@
+name: 개발 작업
+description: 담당자와 완료 조건을 정하고 개발을 시작합니다.
+title: "[작업] "
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: 영역
+      options: [프론트엔드, 백엔드, AI, 공통 설정, 조사]
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: 할 일
+      description: 무엇을 왜 바꾸나요? 담당자는 Assignees에서 지정합니다.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 완료 조건
+      description: 어떤 실행 결과를 확인하면 완료인가요?
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: 먼저 필요한 것
+      description: 다른 파트의 결정이나 선행 작업이 있으면 적어주세요.
