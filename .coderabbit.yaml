@@ -1,12 +1,11 @@
-# Optional: this file does not install CodeRabbit or purchase a plan.
-# Activate the GitHub App only after reviewing access and pricing.
+# Configures automatic reviews once CodeRabbit is installed and authorized.
 # yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
 language: ko-KR
 reviews:
   profile: chill
   request_changes_workflow: false
   auto_review:
-    enabled: false
+    enabled: true
     drafts: false
   path_filters:
     - "!data/**"
