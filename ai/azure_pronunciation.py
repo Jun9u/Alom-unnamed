@@ -16,7 +16,24 @@ def assessment_from_sdk_result(result: Any, *, speechsdk: Any) -> PronunciationA
     if result.reason == speechsdk.ResultReason.NoMatch:
         return PronunciationAssessment(AssessmentStatus.NO_MATCH)
     if result.reason == speechsdk.ResultReason.Canceled:
-        return PronunciationAssessment(AssessmentStatus.CANCELED)
+        try:
+            reason = result.cancellation_details.reason
+        except (AttributeError, RuntimeError, ValueError):
+            return PronunciationAssessment(
+                AssessmentStatus.RECOGNITION_FAILED, issues=("sdk_cancellation_reason_unavailable",)
+            )
+        if reason == speechsdk.CancellationReason.Error:
+            return PronunciationAssessment(
+                AssessmentStatus.SERVICE_ERROR, issues=("sdk_cancellation_error",)
+            )
+        if reason in (
+            speechsdk.CancellationReason.CancelledByUser,
+            speechsdk.CancellationReason.EndOfStream,
+        ):
+            return PronunciationAssessment(AssessmentStatus.CANCELED)
+        return PronunciationAssessment(
+            AssessmentStatus.RECOGNITION_FAILED, issues=("sdk_cancellation_reason_unknown",)
+        )
     if result.reason != speechsdk.ResultReason.RecognizedSpeech:
         return PronunciationAssessment(AssessmentStatus.RECOGNITION_FAILED)
     try:
@@ -52,6 +69,7 @@ def assess_once(
     try:
         speech_config = speechsdk.SpeechConfig(subscription=key, region=region)
         speech_config.speech_recognition_language = "ko-KR"
+        speech_config.output_format = speechsdk.OutputFormat.Detailed
         assessment_config = speechsdk.PronunciationAssessmentConfig(
             reference_text=reference_text,
             grading_system=speechsdk.PronunciationAssessmentGradingSystem.HundredMark,

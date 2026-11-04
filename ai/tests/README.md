@@ -6,7 +6,10 @@
 
 `test_pronunciation.py`는 점수·단어 변환, 누락·null·잘못된 JSON·유효하지 않은 값,
 인식 실패와 부분 결과를 검사합니다. `test_azure_pronunciation.py`는 가짜 SDK로
-호출 설정·오류·변환 연결·import 시 부작용 방지를 검사합니다.
+상세 출력 설정·취소/서비스 오류 구분·단어 결과 연결·import 시 부작용 방지를 검사합니다.
+`test_smoke_credentials.py`는 가짜 dotenv 파서와 가상 프로세스 환경으로 명시적
+동의 전 설정 접근 차단, 환경변수 우선순위, 변수 치환 금지, 설정 오류의 상세정보
+비노출을 검사합니다. 실제 `.env`나 실제 프로세스 키를 사용하지 않습니다.
 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest ai/tests

@@ -7,4 +7,6 @@
 
 `azure_pronunciation_smoke.py`의 선택적 의존성, 오프라인 테스트, 나중에 실행할
 마이크 실험 명령은 [AI 안내](../README.md)에 있습니다. 저장소 루트에서 `-m`으로
-실행하며, `.env`를 읽지 않고 `--call-azure`를 지정할 때만 실제 호출을 진행합니다.
+실행하며, `--call-azure`를 지정할 때만 실제 호출을 진행합니다.
+기존 루트 `.env`를 쓰려면 `--call-azure --use-dotenv`를 함께 지정합니다.
+import·도움말·단위 테스트는 실제 `.env`나 API 키를 읽지 않습니다.
