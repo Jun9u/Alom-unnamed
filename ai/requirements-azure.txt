@@ -1,0 +1,2 @@
+# Optional manual Azure experiment only; not needed by unit tests or general CI.
+azure-cognitiveservices-speech==1.53.0
