@@ -1,0 +1,12 @@
+# 변경 영역별 코드 검토 담당자입니다.
+# PR 작성자 본인은 리뷰어로 자동 요청되지 않습니다.
+# Code owners must have write access; @22011619 needs invitation acceptance.
+/frontend/ @Gwanhun-Kim @salmon979
+/backend/ @22011619 @salmon979
+/ai/ @Jun9u @salmon979
+/scripts/ @Jun9u @salmon979
+/tests/ @Jun9u @salmon979
+/docs/ @Jun9u @Gwanhun-Kim
+/.github/ @Jun9u @salmon979
+/README.md @Jun9u @Gwanhun-Kim
+/CONTRIBUTING.md @Jun9u @Gwanhun-Kim
