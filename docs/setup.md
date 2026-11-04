@@ -1,49 +1,41 @@
-# 초기 설정과 남은 작업
+# 개발 환경과 GitHub 설정
 
-## 포함된 것
+## 로컬 Python 도구
 
-단일 저장소 폴더 구성, 브랜치·PR 규칙, 작업·오류 템플릿,
-Python Ruff 검사·포맷, pre-commit 훅, GitHub Actions CI, 저장소 위생 검사와 테스트입니다.
-프론트엔드·백엔드 프레임워크와 실제 AI 모델은 포함하지 않았습니다.
+Python 3.11 기준으로 Ruff(코드 검사·포맷), pre-commit(커밋 전 검사), pytest(테스트)를 사용합니다. 제품 실행 환경의 최종 버전을 정한 것은 아닙니다.
 
-이 저장소는 준구님의 개인 비공개 저장소로 시작합니다.
-설정 파일 반영과 GitHub 관리 화면의 설정은 별개입니다.
-아래 미적용 항목을 확인하세요. 별도 ZIP 실행이나 저장소 생성 도우미는 필요하지 않습니다.
-
-## 각 개발자가 할 일
-
-Python 3.11이 설치되어 있어야 아래 개발 도구 설치를 실행할 수 있습니다.
-Windows에서는 저장소 루트에서 다음 명령을 실행합니다.
+Windows PowerShell, 저장소 루트에서:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\setup-dev.ps1
 ```
 
-이 실행은 로컬 가상환경을 만들고 검사 도구와 커밋 훅을 설치합니다.
-전역 Python 패키지나 전역 PowerShell 실행 정책을 변경하지 않습니다.
-VS Code에서는 추천 확장 프로그램을 설치하면 Python 저장 시 포맷 설정을 사용할 수 있습니다.
+macOS/Linux:
 
-## 별도로 확인하거나 적용할 것
+```bash
+python3.11 -m venv .venv
+.venv/bin/python -m pip install -r requirements-dev.txt
+.venv/bin/python -m pre_commit install
+.venv/bin/python -m pre_commit run --all-files
+.venv/bin/python -m pytest
+```
 
-- 병합 설정: CONTRIBUTING의 운영안은 Squash merge입니다. 다른 병합 방식 금지와 병합 후 브랜치 자동 삭제는 GitHub Settings에서 별도 설정해야 합니다.
-- 팀원 초대: 실제 GitHub 아이디 확인 후 저장소 Settings의 Collaborators에서 초대합니다.
-- CODEOWNERS: 팀장의 계정을 전체 파일 담당자로 넣지 않았습니다. 실제 아이디와 역할 합의 후 추가합니다.
-- 브랜치 보호: 요금제와 지원 기능을 확인해 PR 승인·CI 성공 조건을 별도 설정합니다.
-- CodeRabbit: 설정만 준비했으며 자동 리뷰는 꺼져 있습니다. 앱 권한·요금을 확인하고
-  해당 저장소에 설치한 뒤 `.coderabbit.yaml`의 `reviews.auto_review.enabled`를 `true`로 바꿉니다.
-  설치와 자동 리뷰 활성화는 별도 동의가 필요한 작업입니다.
-- 프론트·백엔드 검사: 기술 스택 확정 후 각 담당자가 추가합니다.
-- 유료 계정, GPU 서버, 데이터셋 다운로드, 실제 음성 전송: 실행하지 않습니다.
+## 현재 CI 범위
 
-CI의 성공은 설정 파일이 아니라 실제 Actions 실행 결과를 보고 확인하세요.
-현재 테스트는 초기 저장소 검사 코드 테스트이며 발음 평가 기능 테스트가 아닙니다.
+[GitHub Actions](../.github/workflows/ci.yml)는 `main`에 push하거나 `main` 대상 PR을 만들거나 갱신할 때, 또는 수동 실행할 때 작동합니다.
 
-## 근거 문서
+- Python 3.11에서 의존성 설치
+- `pre-commit run --all-files`: Ruff 검사·포맷과 녹음 파일·대용량 파일·흔한 비밀키 실수 검사
+- `pytest`: 현재는 저장소 관리용 테스트. 실제 제품·발음 평가 모델의 성능 시험이 아님
 
-- GitHub 브랜치 보호: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches
-- pre-commit: https://pre-commit.com/
-- Ruff: https://docs.astral.sh/ruff/
-- CodeRabbit 설정: https://docs.coderabbit.ai/reference/configuration
+CI는 결과를 표시할 뿐, 지금은 병합을 자동 차단하지 않습니다. 프런트·백엔드의 자체 검사·빌드는 해당 기술 스택 확정 후 추가합니다. 유료 음성 API나 실제 사용자 음성은 CI에서 사용하지 않습니다.
 
-주요 개발 도구는 확인 가능한 버전으로 고정했습니다. 최신 버전이라는 주장은 하지 않습니다.
-GitHub Actions는 준비 시 확인한 공식 저장소의 v6 커밋 SHA에 고정했습니다.
+## GitHub에서 추가할 설정
+
+- 공개 전환 전 현재 파일·커밋 이력에 비밀키·사용자 음성 등이 없는지 점검
+- 공개 전환 후 `main`에 PR과 CI 성공·작성자 외 리뷰 승인 요구
+- [협업 규칙](../CONTRIBUTING.md)의 실제 계정을 기준으로 CODEOWNERS 또는 리뷰어 자동 요청 설정
+- Squash merge만 사용하고 병합 후 작업 브랜치 자동 삭제
+- CodeRabbit GitHub 앱 설치 여부 확인 후 자동 리뷰 활성화(현재 [설정 파일](../.coderabbit.yaml)에는 비활성화)
+
+팀원 초대는 진행했으며, 각 계정의 수락과 실제 접근 권한은 별도로 확인합니다. GitHub 관리 화면 설정과 저장소에 설정 파일을 두는 것은 별개입니다.
