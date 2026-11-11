@@ -95,7 +95,8 @@ export function weekDates() {
     return dayKey(d);
   });
 }
-const archiveKey = "malgyeol.attempts.v2";
+const archiveKey = "barumi.attempts.v2";
+const legacyArchiveKey = "malgyeol.attempts.v2";
 function examples(): Entry[] {
   return [1, 2, 1, 0].map((sentenceIndex, i) => {
     const sentence = library[sentenceIndex];
@@ -123,7 +124,8 @@ function examples(): Entry[] {
   });
 }
 function archived(): Entry[] {
-  const raw = localStorage.getItem(archiveKey);
+  const raw =
+    localStorage.getItem(archiveKey) ?? localStorage.getItem(legacyArchiveKey);
   if (raw) return JSON.parse(raw);
   const initial = examples();
   localStorage.setItem(archiveKey, JSON.stringify(initial));

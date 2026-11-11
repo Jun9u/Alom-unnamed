@@ -1,4 +1,4 @@
-# 바르미 · 아롬 2팀 발음 연습
+# 바르미 (Barumi) 프론트엔드
 
 [편집 가능한 모바일 화면과 클릭 흐름](https://www.figma.com/design/es0XYfuSqyZffFkHdGfahX?node-id=8-47)
 
